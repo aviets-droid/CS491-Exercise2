@@ -16,8 +16,9 @@ const playerchar = "O";
 
 // Computational functions
 
-/**
- * @param {Array} cellarr 
+/** Checks if innerText across an array of cells are equal. 
+ * @param {Object[]} cellarr
+ * @returns {boolean}
  */
 
 function com_arrayeq(cellarr) {
@@ -28,10 +29,7 @@ function com_arrayeq(cellarr) {
   return Array.from(cellarr).every(cell => cell.innerText.trim() == fe);
 }
 
-/**
- * @param {} 
- */
-
+/** Checks for TTT win conditions. */
 function com_checkwin() {
   var tbl = document.getElementById("table");
   var tblrows = tbl.rows; // all rows
@@ -90,10 +88,7 @@ function com_checkwin() {
   }
 }
 
-/**
- * @param {} 
- */
-
+/** Calculates the next move that the computer makes. */
 function com_nextMove() {
   if (gamestate == "FirstMove") {
     for (let i=1; i<=2; i++){
@@ -108,10 +103,9 @@ function com_nextMove() {
   }
 }
 
-/**
- * @param {} 
+/** Gets a random empty table cell and sets its text content to given string (s).
+ * @param {string} s 
  */
-
 function com_setrandemptycell(s) {
   var tbl = document.getElementById("table");
   var ro = tbl.rows; // rows in tbl
@@ -126,13 +120,14 @@ function com_setrandemptycell(s) {
     }
   }
   var rand = Math.floor(Math.random() * empty.length);
-  empty[rand].textContent = computerchar;
+  empty[rand].textContent = s;
 }
 
-/**
- * @param {} 
+/** Sets the text content of the cell specified by row (r) and column (c) to the given string parameter (s).
+ * @param {number} r
+ * @param {number} c
+ * @param {string} s 
  */
-
 function com_setcell(r, c, s) {
   var tbl = document.getElementById("table");
   var ro = tbl.rows[r];
@@ -140,10 +135,7 @@ function com_setcell(r, c, s) {
   ce.textContent = s;
 }
 
-/**
- * @param {} 
- */
-
+/** Updates Clear/Start button based on game state. */
 function com_buttonclick() {
   var btn = document.getElementById("btn");
   var tbl = document.getElementById("table");
@@ -161,10 +153,7 @@ function com_buttonclick() {
   }
 }
 
-/**
- * @param {} 
- */
-
+/** Clears the tic tac toe board. */
 function com_cleartable() {
   var tbl = document.getElementById("table");
   for (let i=0; i<rows; i++) {
@@ -175,10 +164,9 @@ function com_cleartable() {
   }
 }
 
-/**
- * @param {} 
+/** Responds to the user clicking on cells in the table.
+ * @param {Object} event 
  */
-
 function com_cellclick(event) {
   var clickedcell = event.target;
   if (clickedcell.textContent != computerchar && gamestate == "Player" && clickedcell.textContent != playerchar) {
@@ -191,10 +179,7 @@ function com_cellclick(event) {
 
 // UI functions
 
-/**
- * @param {} 
- */
-
+/** Creates the table/playing board visually. */
 function vis_table() {
   var table = document.createElement("table");
   table.id = "table";
@@ -209,10 +194,7 @@ function vis_table() {
   document.body.appendChild(table);
 }
 
-/**
- * @param {} 
- */
-
+/** Creates the clickable Clear/Start button. */
 function vis_button() {
   var button = document.createElement("button");
   button.id = "btn";
@@ -221,10 +203,7 @@ function vis_button() {
   document.body.appendChild(button);
 }
 
-/**
- * @param {} 
- */
-
+/** Loads the table/playing board and Clear/Start button. */
 function vis_loadpage() {
   vis_table();
   vis_button();
