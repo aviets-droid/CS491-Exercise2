@@ -20,7 +20,7 @@ function com_checkwin() {
   var tblrows = tbl.rows; // all rows
   var iswinner = false;
 
-  for (let i=0; i<rows; i++) { // check all rows
+  for (let i=0; i<rows; i++) { // check rows
     var crow = tblrows[i].cells; // all cells in current row
     if (com_arrayeq(crow)) {
       for (let j=0; j<cols; j++) {
@@ -30,7 +30,7 @@ function com_checkwin() {
     }
   }
 
-  for (let i=0; i<cols; i++) {
+  for (let i=0; i<cols; i++) { // check columns
     let colarr = [];
     for (j=0; j<rows; j++) {
       colarr.push(tblrows[j].cells[i]);
@@ -43,8 +43,32 @@ function com_checkwin() {
     }
   }
 
+  let diagarr1 = [];
+  for (let i=0; i<rows; i++) { // check diagonals (x,x)
+    diagarr1.push(tblrows[i].cells[i]);
+  }
+  if (com_arrayeq(diagarr1)) {
+    for (let n=0; n<rows; n++) {
+      diagarr1[n].style.color = "red";
+    }
+    iswinner = true;
+  }
+
+  let diagarr2 = [];
+  let idx = rows - 1;
+  for (let i=idx; i>=0; i--) {
+    diagarr2.push(tblrows[i].cells[idx-i]);
+  }
+  if (com_arrayeq(diagarr2)) {
+    for (let n=0; n<rows; n++) {
+      diagarr2[n].style.color = "red";
+    }
+    iswinner = true;
+  }
+
   if (iswinner) {
     document.getElementById("title").innerHTML = gamestate + " wins";
+    gamestate = "GameWin";
   }
 }
 
