@@ -3,10 +3,6 @@
 // CS 491 Exercise 2
 // Tic Tac Toe
 
-/**
- * @param {} 
- */
-
 var gamestate = "Idle";
 const rows = 3;
 const cols = 3;
@@ -34,18 +30,6 @@ function com_checkwin() {
   var tbl = document.getElementById("table");
   var tblrows = tbl.rows; // all rows
   var iswinner = false;
-  var tblcells = document.querySelectorAll('td');
-  var drawcount = 0;
-
-  for (let i=0; i<tblcells.length; i++) {
-    if (tblcells[i] != whitespace) {
-      drawcount++;
-    }
-  }
-  if (drawcount == (rows * cols)) {
-    document.getElementById("title").innerHTML = "Draw";
-    gamestate = "Draw";
-  }
 
   for (let i=0; i<rows; i++) { // check rows
     var crow = tblrows[i].cells; // all cells in current row
