@@ -7,31 +7,45 @@ const playerchar = "O";
 
 // Computational functions
 
-function arrayeq(arr) {
-  const fe = arr[0];
-  if (fe === whitespace) {
+function com_arrayeq(cellarr) {
+  const fe = cellarr[0].innerText.trim();
+  if (fe == whitespace || fe == "") {
     return false;
   }
-  else {
-    return arr.every(elem => elem === fe);
-  }
-}
-
-function colorcells(cellarr, color) {
-  cellarr.forEach(cell => {
-    cell.style.color = color;
-  });
+  return Array.from(cellarr).every(cell => cell.innerText.trim() == fe);
 }
 
 function com_checkwin() {
   var tbl = document.getElementById("table");
-  var tblrows = tbl.rows;
-  var row1 = tblrows[0].cells;
-  row1.style.color = "red";
+  var tblrows = tbl.rows; // all rows
+  var iswinner = false;
 
-  // if (arrayeq(row1)) {
-  //   colorcells(row1, "red");
-  // }
+  for (let i=0; i<rows; i++) { // check all rows
+    var crow = tblrows[i].cells; // all cells in current row
+    if (com_arrayeq(crow)) {
+      for (let j=0; j<cols; j++) {
+        crow[j].style.color = "red";
+      }
+      iswinner = true;
+    }
+  }
+
+  for (let i=0; i<cols; i++) {
+    let colarr = [];
+    for (j=0; j<rows; j++) {
+      colarr.push(tblrows[j].cells[i]);
+    }
+    if (com_arrayeq(colarr)) {
+      for (let n=0; n<rows; n++) {
+        colarr[n].style.color = "red";
+      }
+      iswinner = true;
+    }
+  }
+
+  if (iswinner) {
+    document.getElementById("title").innerHTML = gamestate + " wins";
+  }
 }
 
 function com_nextMove() {
@@ -39,13 +53,13 @@ function com_nextMove() {
     for (let i=1; i<=2; i++){
     com_setrandemptycell(computerchar);
     }
-    gamestate = "PlayerTurn";
+    gamestate = "Player";
   }
-  else if (gamestate == "ComputerTurn") {
+  else if (gamestate == "Computer") {
     com_setrandemptycell(computerchar);
-    gamestate = "PlayerTurn";
+    com_checkwin();
+    gamestate = "Player";
   }
-  com_checkwin();
 }
 
 function com_setrandemptycell(s) {
@@ -82,6 +96,7 @@ function com_buttonclick() {
   else {
     btn.textContent = "Start";
     gamestate = "Idle";
+    document.getElementById("title").innerHTML = "Tic Tac Toe";
     com_cleartable();
   }
 }
@@ -91,15 +106,17 @@ function com_cleartable() {
   for (let i=0; i<rows; i++) {
     for (let j=0; j<cols; j++) {
       com_setcell(i, j, whitespace);
+      tbl.rows[i].cells[j].style.color = "black";
     }
   }
 }
 
 function com_cellclick(event) {
   var clickedcell = event.target;
-  if (clickedcell.textContent != computerchar && gamestate == "PlayerTurn") {
+  if (clickedcell.textContent != computerchar && gamestate == "Player" && clickedcell.textContent != playerchar) {
     clickedcell.textContent = playerchar;
-    gamestate = "ComputerTurn";
+    com_checkwin();
+    gamestate = "Computer";
     com_nextMove();
   }
 }
