@@ -39,7 +39,6 @@ function com_checkwin() {
         crow[j].style.color = "red";
       }
       iswinner = true;
-      winningchar = crow[0].innerText.trim();
     }
   }
 
@@ -53,7 +52,6 @@ function com_checkwin() {
         colarr[n].style.color = "red";
       }
       iswinner = true;
-      winningchar = colarr[0].innerText.trim();
     }
   }
 
@@ -66,7 +64,6 @@ function com_checkwin() {
       diagarr1[n].style.color = "red";
     }
     iswinner = true;
-    winningchar = diagarr1[0].innerText.trim();
   }
 
   let diagarr2 = [];
@@ -79,18 +76,10 @@ function com_checkwin() {
       diagarr2[n].style.color = "red";
     }
     iswinner = true;
-    winningchar = diagarr2.innerText.trim();
   }
 
   if (iswinner) {
-    titletext = document.getElementById("title").innerHTML;
-    if (winningchar == computerchar) {
-      titletext = "Computer wins"
-    }
-    else {
-      titletext = "Player wins";
-    }
-    // document.getElementById("title").innerHTML = gamestate + " wins";
+    document.getElementById("title").innerHTML = gamestate + " wins";
     gamestate = "GameWin";
     tbl.removeEventListener('click', com_cellclick);
   }
