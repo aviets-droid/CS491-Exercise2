@@ -174,4 +174,4 @@ function vis_loadpage() {
   vis_button();
 }
 
-document.addEventListener("load", vis_loadpage());
+// document.addEventListener("load", vis_loadpage());
