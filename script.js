@@ -1,3 +1,12 @@
+// Aisling Viets
+// 6/14/25
+// CS 491 Exercise 2
+// Tic Tac Toe
+
+/**
+ * @param {} 
+ */
+
 var gamestate = "Idle";
 const rows = 3;
 const cols = 3;
@@ -7,6 +16,10 @@ const playerchar = "O";
 
 // Computational functions
 
+/**
+ * @param {Array} cellarr 
+ */
+
 function com_arrayeq(cellarr) {
   const fe = cellarr[0].innerText.trim();
   if (fe == whitespace || fe == "") {
@@ -14,6 +27,10 @@ function com_arrayeq(cellarr) {
   }
   return Array.from(cellarr).every(cell => cell.innerText.trim() == fe);
 }
+
+/**
+ * @param {} 
+ */
 
 function com_checkwin() {
   var tbl = document.getElementById("table");
@@ -73,6 +90,10 @@ function com_checkwin() {
   }
 }
 
+/**
+ * @param {} 
+ */
+
 function com_nextMove() {
   if (gamestate == "FirstMove") {
     for (let i=1; i<=2; i++){
@@ -86,6 +107,10 @@ function com_nextMove() {
     gamestate = "Player";
   }
 }
+
+/**
+ * @param {} 
+ */
 
 function com_setrandemptycell(s) {
   var tbl = document.getElementById("table");
@@ -104,12 +129,20 @@ function com_setrandemptycell(s) {
   empty[rand].textContent = computerchar;
 }
 
+/**
+ * @param {} 
+ */
+
 function com_setcell(r, c, s) {
   var tbl = document.getElementById("table");
   var ro = tbl.rows[r];
   var ce = ro.cells[c];
   ce.textContent = s;
 }
+
+/**
+ * @param {} 
+ */
 
 function com_buttonclick() {
   var btn = document.getElementById("btn");
@@ -128,6 +161,10 @@ function com_buttonclick() {
   }
 }
 
+/**
+ * @param {} 
+ */
+
 function com_cleartable() {
   var tbl = document.getElementById("table");
   for (let i=0; i<rows; i++) {
@@ -137,6 +174,10 @@ function com_cleartable() {
     }
   }
 }
+
+/**
+ * @param {} 
+ */
 
 function com_cellclick(event) {
   var clickedcell = event.target;
@@ -149,6 +190,10 @@ function com_cellclick(event) {
 }
 
 // UI functions
+
+/**
+ * @param {} 
+ */
 
 function vis_table() {
   var table = document.createElement("table");
@@ -164,6 +209,10 @@ function vis_table() {
   document.body.appendChild(table);
 }
 
+/**
+ * @param {} 
+ */
+
 function vis_button() {
   var button = document.createElement("button");
   button.id = "btn";
@@ -171,6 +220,10 @@ function vis_button() {
   button.addEventListener("click", com_buttonclick);
   document.body.appendChild(button);
 }
+
+/**
+ * @param {} 
+ */
 
 function vis_loadpage() {
   vis_table();
