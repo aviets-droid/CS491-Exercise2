@@ -69,6 +69,7 @@ function com_checkwin() {
   if (iswinner) {
     document.getElementById("title").innerHTML = gamestate + " wins";
     gamestate = "GameWin";
+    tbl.removeEventListener('click', com_cellclick);
   }
 }
 
