@@ -113,9 +113,11 @@ function com_setcell(r, c, s) {
 
 function com_buttonclick() {
   var btn = document.getElementById("btn");
+  var tbl = document.getElementById("table");
   if (btn.textContent == "Start") {
     btn.textContent = "Clear";
     gamestate = "FirstMove";
+    tbl.addEventListener('click', com_cellclick);
     com_nextMove();
   }
   else {
@@ -151,7 +153,7 @@ function com_cellclick(event) {
 function vis_table() {
   var table = document.createElement("table");
   table.id = "table";
-  table.addEventListener('click', com_cellclick);
+  // table.addEventListener('click', com_cellclick);
   for (let i=1; i<=rows; i++) {
     var row = table.insertRow();
     for (let j=1; j<=cols; j++) {
