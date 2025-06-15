@@ -173,5 +173,3 @@ function vis_loadpage() {
   vis_table();
   vis_button();
 }
-
-// document.addEventListener("load", vis_loadpage());
